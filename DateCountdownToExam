@@ -1,0 +1,45 @@
+package Fundamentals;
+ 
+ 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+ 
+ 
+public class DateCountdownToExam {
+    public static void main(String[] args) {
+ 
+ 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        int secondsInADay = 86400;
+        Calendar thatDay = Calendar.getInstance();
+        thatDay.setTime(new Date(0));
+        int year = 2021;
+        int day = 5;
+        int hour = 9;
+        int min = 0;
+        int sec = 0;
+        thatDay.set(year, Calendar.DECEMBER, day, hour, min, sec);
+        Calendar today = Calendar.getInstance();
+        long diff = thatDay.getTimeInMillis() - today.getTimeInMillis();
+        long diffSec = diff / 1000;
+ 
+        long days = diffSec / secondsInADay;
+        long secondsDay = diffSec % secondsInADay;
+        long seconds = secondsDay % 60;
+        long minutes = (secondsDay / 60) % 60;
+        long hours = (secondsDay / 3600);
+ 
+        System.out.println("******************************");
+        System.out.print("Time now: ");
+        System.out.println(dtf.format(now));
+        System.out.printf("Time to Java Fundamentals exam: \n ** %d ** days\n" +
+                        " ** %d ** hours\n ** %d ** minutes\n and ** %d ** seconds\n"
+                , days, hours, minutes, seconds);
+        System.out.println("******************************");
+ 
+ 
+    }
+}
